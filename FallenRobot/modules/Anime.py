@@ -1,35 +1,3 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Codespaces
-Marketplace
-Explore
- 
-@MeIzSaiPranav 
-MeIzSaiPranav
-/
-YuukiKonnoPrivatee
-Public
-Fork your own copy of MeIzSaiPranav/YuukiKonnoPrivatee
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-YuukiKonnoPrivatee/EmiliaAnimeBot/modules/anime.py /
-@MeIzSaiPranav
-MeIzSaiPranav Update anime.py
-Latest commit d71ed94 on Sep 23, 2021
- History
- 1 contributor
-606 lines (534 sloc)  19.4 KB
- 
-
 import datetime
 import html
 import textwrap
@@ -37,9 +5,9 @@ import textwrap
 import bs4
 import jikanpy
 import requests
-from EmiliaAnimeBot import DEV_USERS, OWNER_ID, DRAGONS, dispatcher
-from EmiliaAnimeBot.modules.disable import DisableAbleCommandHandler
-from EmiliaAnimeBot import pbot, telegraph
+from FallenRobot import DEV_USERS, OWNER_ID, DRAGONS, dispatcher
+from FallenRobot.modules.disable import DisableAbleCommandHandler
+from FallenRobot import pbot, telegraph
 from telegram import (InlineKeyboardButton, InlineKeyboardMarkup, ParseMode,
                       Update)
 from telegram.ext import CallbackContext, CallbackQueryHandler, run_async
@@ -631,17 +599,3 @@ __handlers__ = [
     UPCOMING_HANDLER, KAIZOKU_SEARCH_HANDLER, KAYO_SEARCH_HANDLER,
     BUTTON_HANDLER, AIRING_HANDLER
 ]
-Footer
-© 2023 GitHub, Inc.
-Footer navigation
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
