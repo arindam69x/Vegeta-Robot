@@ -7,6 +7,7 @@ import telegram.ext as tg
 from aiohttp import ClientSession
 from pyrogram import Client, errors
 from telethon import TelegramClient
+from telegraph import Telegraph
 
 StartTime = time.time()
 
@@ -151,6 +152,9 @@ telethn = TelegramClient("Fallen", API_ID, API_HASH)
 pbot = Client("FallenRobot", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
 dispatcher = updater.dispatcher
 aiohttpsession = ClientSession()
+
+telegraph = Telegraph()
+telegraph.create_account(short_name="mizu")
 
 print("[INFO]: Getting Bot Info...")
 BOT_ID = dispatcher.bot.id
