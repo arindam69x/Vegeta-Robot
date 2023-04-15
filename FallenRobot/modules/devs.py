@@ -6,17 +6,16 @@ import traceback
 from contextlib import redirect_stdout
 from subprocess import getoutput as run
 from pyrogram import filters
-from pyrogram import Client as Nandha
-from Nandha.help.paste import spacebin
-from Nandha.help.couplesdb import get_chats as couples_chats
-from Nandha.help.rulesdb import rules_chat as rules_chats
-from Nandha.help.chatbotdb import get_chat as chatbot_chats
-from Nandha.help.usersdb import get_users 
-from Nandha.help.chatsdb import get_chats
+from FallenRobot.help.paste import spacebin
+from FallenRobot.help.couplesdb import get_chats as couples_chats
+from FallenRobot.help.rulesdb import rules_chat as rules_chats
+from FallenRobot.help.chatbotdb import get_chat as chatbot_chats
+from FallenRobot.help.usersdb import get_users 
+from FallenRobot.help.chatsdb import get_chats
 from datetime import datetime
 
 
-@Nandha.on_message(filters.command("stats",config.CMDS))
+@FallenRobot.on_message(filters.command("stats",config.CMDS))
 async def stats(_, message):
      user_id = message.from_user.id
      if not user_id in config.DEVS:
@@ -36,7 +35,7 @@ async def stats(_, message):
      await message.reply(stats)
      
 
-@Nandha.on_message(filters.command("logs",config.CMDS))
+@FallenRobot.on_message(filters.command("logs",config.CMDS))
 async def logs(_, message):
      if message.from_user.id in config.DEVS:
           try:
@@ -51,7 +50,7 @@ async def logs(_, message):
         await message.reply("`You Don't have Enough Rights to Run This!`")
 
 
-@Nandha.on_message(filters.command("sh",config.CMDS))
+@FallenRobot.on_message(filters.command("sh",config.CMDS))
 async def sh(_, message):
     if not message.from_user.id in config.DEVS:
           return await message.reply_text("`You Don't Have Rights To Run This!`")
@@ -76,7 +75,7 @@ async def aexec(code, client, message):
     return await locals()["__aexec"](client, message)
 
 
-@Nandha.on_message(filters.command(["run","eval", "e"],config.CMDS))
+@FallenRobot.on_message(filters.command(["run","eval", "e"],config.CMDS))
 async def eval(client, message):
     if not message.from_user.id in config.DEVS:
          return await message.reply_text("`You Don't Have Enough Rights To Run This!`")
@@ -131,7 +130,7 @@ async def eval(client, message):
         await status_message.edit_text(final_output)
 
 
-@Nandha.on_message(filters.command("leave",config.CMDS))
+@FallenRobot.on_message(filters.command("leave",config.CMDS))
 async def leave(_, message):
     user_id = message.from_user.id
     chat_id = message.chat.id
@@ -140,12 +139,12 @@ async def leave(_, message):
         return await message.reply("`You Don't Enough Rights To Do This!`")
     if reply or not reply and len(message.text.split()) <2:
          await message.reply("`I'm leaving here bye buddy's!`")
-         await Nandha.leave_chat(chat_id)
+         await FallenRobot.leave_chat(chat_id)
     elif reply or not reply and len(message.text.split()) >2:
           return await message.reply("`Give me only chat ID!`")
     elif reply or not reply and len(message.text.split()) == 1:
          await message.reply("`I'm leaving here bye buddy's!`")
-         await Nandha.leave_chat(message.text.split()[1])
+         await FallenRobot.leave_chat(message.text.split()[1])
     
 
 __MODULE__ = "Dev"
