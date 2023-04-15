@@ -1,7 +1,6 @@
 import logging
 import os
 import sys
-import config
 import time
 
 import telegram.ext as tg
@@ -19,6 +18,12 @@ logging.basicConfig(
     level=logging.INFO,
 )
 
+logging.basicConfig(
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[logging.FileHandler('log.txt'),
+    from FallenRobot.config import Development as Config
+    TOKEN = Config.TOKEN
+              
 logging.getLogger("apscheduler").setLevel(logging.ERROR)
 logging.getLogger("telethon").setLevel(logging.ERROR)
 logging.getLogger("pyrogram").setLevel(logging.ERROR)
