@@ -1,7 +1,6 @@
 import importlib
 import re
 import time
-import config
 from platform import python_version as y
 from sys import argv
 
