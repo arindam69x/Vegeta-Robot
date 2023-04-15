@@ -6,12 +6,12 @@ import traceback
 from contextlib import redirect_stdout
 from subprocess import getoutput as run
 from pyrogram import filters
-from FallenRobot.help.paste import spacebin
-from FallenRobot.help.couplesdb import get_chats as couples_chats
-from FallenRobot.help.rulesdb import rules_chat as rules_chats
-from FallenRobot.help.chatbotdb import get_chat as chatbot_chats
-from FallenRobot.help.usersdb import get_users 
-from FallenRobot.help.chatsdb import get_chats
+from FallenRobot.modules.paste import spacebin
+from FallenRobot.modules.couplesdb import get_chats as couples_chats
+from FallenRobot.modules.rulesdb import rules_chat as rules_chats
+from FallenRobot.modules.chatbotdb import get_chat as chatbot_chats
+from FallenRobot.modules.usersdb import get_users 
+from FallenRobot.modules.chatsdb import get_chats
 from datetime import datetime
 
 
