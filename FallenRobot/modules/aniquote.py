@@ -18,3 +18,8 @@ def quote(update: Update, context: CallbackContext):
         r = requests.get(f"https://animechan.vercel.app/api/random").json()
         reply_text = f"**{resp['quote']}**\n"
     message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN)
+    
+    """
+QUOTES_HANDLER = DisableAbleCommandHandler("quote", quote)
+
+dispatcher.add_handler(QUOTES_HANDLER)
