@@ -3,8 +3,7 @@ from telegram import ParseMode, Update
 from FallenRobot.events import register
 from telegram.ext import CallbackContext, run_async
 
-@register(pattern="^/quote (.*)")
-    
+@pbot.on_message(filters.command("quote"))
 @run_async
 def quote(update: Update, context: CallbackContext):
     message = update.effective_message
