@@ -1,5 +1,6 @@
 import requests
 from telegram import ParseMode, Update
+from FallenRobot.events import register
 from telegram.ext import CallbackContext, run_async
 
 @register(pattern="^/quote (.*)")
