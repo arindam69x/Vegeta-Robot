@@ -2,6 +2,8 @@ import requests
 from telegram import ParseMode, Update
 from telegram.ext import CallbackContext, run_async
 
+@register(pattern="^/quote (.*)")
+    
 @run_async
 def quote(update: Update, context: CallbackContext):
     message = update.effective_message
