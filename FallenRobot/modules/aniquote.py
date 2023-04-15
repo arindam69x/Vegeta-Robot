@@ -9,4 +9,4 @@ def quote(update: Update, context: CallbackContext):
     reply_text = f"**{r['quote']}** - {r['character']} ({r['anime']})"
     update.message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN)
 
-register("quote", quote)
+register(cmd="quote", func=quote)
