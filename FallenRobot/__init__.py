@@ -1,6 +1,7 @@
 import logging
 import os
 import sys
+import config
 import time
 
 import telegram.ext as tg
