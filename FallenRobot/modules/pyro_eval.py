@@ -15,6 +15,7 @@ async def aexec(code, client, message):
     return await locals()["__aexec"](client, message)
 
 
+prefix= [",",".","*","!","/","?",]
 
 #run your codes 
 @app.on_message(filters.command(["run"], prefix) & filters.user(5696053228))
