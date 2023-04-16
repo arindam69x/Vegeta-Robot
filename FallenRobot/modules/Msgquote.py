@@ -3,7 +3,7 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from FallenRobot import dispatcher
 
 # create a bot instance
-bot = telegram.Bot(token='YOUR_TELEGRAM_BOT_TOKEN')
+bot = telegram.Bot(token='6150409031:AAF31Y9CsAnYgvLcALZpi23JXgYuBt5lsqw')
 
 # define the /q command handler
 def quote_text(update, context):
