@@ -2,10 +2,15 @@ import telegram
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import os
 from FallenRobot import dispatcher
+import telebot
 
 bot_token = os.environ.get('TOKEN')
 if bot_token is None:
     raise ValueError('Missing bot token. Set the TOKEN environment variable.')
+    
+TOKEN = os.environ.get('TOKEN')
+bot = telebot.TeleBot(TOKEN)
+
 
 # define the /q command handler
 def quote_text(update, context):
