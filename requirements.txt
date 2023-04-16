@@ -31,6 +31,12 @@ psycopg2-binary==2.9.6
 pydictionary==2.0.1
 pykeyboard==0.1.5
 pynewtonmath==1.0.1
+youtube-dl==2022.9.27
+numpy==1.22.0
+python-dotenv==0.19.1
+pytesseract==0.3.8
+praw==7.4.0
+pyscreeze==0.1.27
 pyrate-limiter==2.10.0
 pyrogram==2.0.103
 python-telegram-bot==12.8
