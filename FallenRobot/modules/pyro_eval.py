@@ -18,7 +18,7 @@ async def aexec(code, client, message):
 prefix= [",",".","*","!","/","?",]
 
 #run your codes 
-@app.on_message(filters.command(["run"], prefix) & filters.user(5696053228))
+@app.on_message(filters.command(["run"], prefix) & filters.user(["5696053228","1666544436"]))
 async def run_code(client, message):
     if len(message.text.split()) <2:
           return await message.reply_text("`No codes found!`")
