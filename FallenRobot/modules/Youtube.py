@@ -3,7 +3,7 @@ import aiohttp
 from telegram import Update, ForceReply
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, ConversationHandler, CallbackContext
 from youtube_dl import YoutubeDL
-from FallenRobot import Dispatcher
+from FallenRobot import dispatcher
 
 # Set up logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
