@@ -5,6 +5,10 @@ import os
 bot_token = os.environ.get('TOKEN')
 if bot_token is None:
     raise ValueError('Missing bot token. Set the TOKEN environment variable.')
+    
+TOKEN = os.environ.get('TOKEN')
+bot = telebot.TeleBot(TOKEN)
+
 
 @bot.message_handler(commands=['yt'])
 def download_video(message):
