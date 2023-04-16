@@ -1,7 +1,10 @@
 import telebot
 from pytube import YouTube
+import os
 
-bot = telebot.TeleBot('6150409031:AAF31Y9CsAnYgvLcALZpi23JXgYuBt5lsqw')
+bot_token = os.environ.get('TOKEN')
+if bot_token is None:
+    raise ValueError('Missing bot token. Set the TOKEN environment variable.')
 
 @bot.message_handler(commands=['yt'])
 def download_video(message):
