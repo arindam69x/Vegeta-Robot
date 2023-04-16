@@ -1,98 +1,85 @@
-import requests
-import os
-
-from telegram import Update
-from telegram.ext import CommandHandler, CallbackContext, ConversationHandler
+import logging
+import aiohttp
+from telegram import Update, ForceReply
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, ConversationHandler, CallbackContext
+from youtube_dl import YoutubeDL
 from FallenRobot import Dispatcher
 
-YTCHOICE, YTLINK = range(2)
+# Set up logging
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
+logger = logging.getLogger(__name__)
 
-def yt_choice(update: Update, context: CallbackContext):
-    update.message.reply_text("Do you want to download a video or audio?\n"
-                              "Enter 1️⃣ for Video\n"
-                              "Enter 2️⃣ for Audio")
-    return YTCHOICE
+# Define the states of the conversation
+VIDEO, AUDIO = range(2)
 
+# Define the callback functions for the conversation
+def video_callback(update: Update, context: CallbackContext) -> int:
+    # Send a message to the user
+    update.message.reply_text('Please enter the URL of the video you want to download.')
 
-def yt_link(update: Update, context: CallbackContext):
-    choice = update.message.text
-    context.user_data['choice'] = choice
+    # Set the state of the conversation to VIDEO
+    return VIDEO
 
-    update.message.reply_text("Enter the YouTube video link.")
-    return YTLINK
+def audio_callback(update: Update, context: CallbackContext) -> int:
+    # Send a message to the user
+    update.message.reply_text('Please enter the URL of the video you want to extract audio from.')
 
+    # Set the state of the conversation to AUDIO
+    return AUDIO
 
-def yt_receive_link(update: Update, context: CallbackContext):
-    link = update.message.text
-    choice = context.user_data['choice']
-    vid_format = 'mp4' if choice == '1' else 'mp3'
+def video_url(update: Update, context: CallbackContext) -> int:
+    # Get the URL from the user's message
+    url = update.message.text
 
-    r = requests.get(f'https://www.y2mate.com/mates/{os.environ.get("Y2MATE_API_KEY")}/analyze/ajax',
-                     headers={
-                         'referer': 'https://www.y2mate.com/youtube-downloader',
-                         'sec-fetch-dest': 'empty',
-                         'sec-fetch-mode': 'cors',
-                         'sec-fetch-site': 'same-origin',
-                         'x-requested-with': 'XMLHttpRequest',
-                     },
-                     params={
-                         'url': link,
-                         'q_auto': 0,
-                         'ajax': 1
-                     })
+    # Download the video using youtube_dl
+    ydl_opts = {'outtmpl': 'video.mp4'}
+    with YoutubeDL(ydl_opts) as ydl:
+        ydl.download([url])
 
-    data = r.json()
+    # Send the video to the user
+    with open('video.mp4', 'rb') as video_file:
+        update.message.reply_video(video=video_file)
 
-    title = data['title']
-    thumb = data['image']
-    filesize = data['filesize']
-    filesize = filesize/(1024*1024)
-    update.message.reply_text(f"Title: {title}\n"
-                              f"Size: {filesize:.2f} MB\n\n"
-                              f"Processing download...")
-    time.sleep(1.5)
-
-    r = requests.get(f'https://www.y2mate.com/mates/{os.environ.get("Y2MATE_API_KEY")}/convert',
-                     headers={
-                         'referer': 'https://www.y2mate.com/youtube-downloader',
-                         'sec-fetch-dest': 'empty',
-                         'sec-fetch-mode': 'cors',
-                         'sec-fetch-site': 'same-origin',
-                         'x-requested-with': 'XMLHttpRequest',
-                     },
-                     params={
-                         'type': 'youtube',
-                         'vid': data['vid'],
-                         'mp3': vid_format,
-                         'quality': data['fquality'],
-                         'auto': 0,
-                         'ajax': 1
-                     })
-
-    download_data = r.json()
-
-    download_url = download_data['result'][0]['url']
-    update.message.reply_text(f"Title: {title}\n"
-                              f"Size: {filesize:.2f} MB\n\n"
-                              f"Sending {vid_format.upper()}...")
-
-    if choice == '1':
-        context.bot.send_video(update.message.chat_id, video=download_url, thumb=thumb, caption=title)
-    elif choice == '2':
-        context.bot.send_audio(update.message.chat_id, audio=download_url, thumb=thumb, title=title)
-
+    # End the conversation
     return ConversationHandler.END
 
+def audio_url(update: Update, context: CallbackContext) -> int:
+    # Get the URL from the user's message
+    url = update.message.text
 
-def yt_cancel(update: Update, context: CallbackContext):
-    update.message.reply_text("Download cancelled.")
+    # Download the audio using youtube_dl
+    ydl_opts = {'outtmpl': 'audio.mp3', 'format': 'bestaudio/best', 'postprocessors': [{'key': 'FFmpegExtractAudio', 'preferredcodec': 'mp3', 'preferredquality': '192'}]}
+    with YoutubeDL(ydl_opts) as ydl:
+        ydl.download([url])
+
+    # Send the audio to the user
+    with open('audio.mp3', 'rb') as audio_file:
+        update.message.reply_audio(audio=audio_file)
+
+    # End the conversation
     return ConversationHandler.END
 
+def cancel(update: Update, context: CallbackContext) -> int:
+    # Send a message to the user indicating that the conversation has been canceled
+    update.message.reply_text('Conversation canceled.')
 
-yt_handler = ConversationHandler(
-    entry_points=[CommandHandler('yt', yt_choice)],
-    states={
-        YTCHOICE: [CommandHandler('cancel', yt_cancel), yt_link],
-        YTLINK: [CommandHandler('cancel', yt_cancel), CommandHandler('yt', yt_receive_link)],
-    },
-    fallback
+    # End the conversation
+    return ConversationHandler.END
+
+def youtube_handler(update: Update, context: CallbackContext) -> None:
+    # Start the conversation
+    update.message.reply_text('Do you want to download a video or extract audio? Type /cancel to stop.')
+
+    # Set up the ConversationHandler
+    yt_handler = ConversationHandler(
+        entry_points=[CommandHandler('yt', video_callback)],
+        states={
+            VIDEO: [MessageHandler(Filters.text & ~Filters.command, video_url)],
+            AUDIO: [MessageHandler(Filters.text & ~Filters.command, audio_url)]
+        },
+        fallbacks=[CommandHandler('cancel', cancel)]
+    )
+
+    # Add the ConversationHandler to the dispatcher
+    updater.dispatcher.add_handler(yt_handler)
+
