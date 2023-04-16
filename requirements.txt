@@ -31,7 +31,7 @@ psycopg2-binary==2.9.6
 pydictionary==2.0.1
 pykeyboard==0.1.5
 pynewtonmath==1.0.1
-youtube-dl==2022.3.7
+youtube-dl==2021.06.06
 numpy==1.22.0
 python-dotenv==0.19.1
 pytesseract==0.3.8
