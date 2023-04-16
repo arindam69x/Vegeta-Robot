@@ -1,21 +1,18 @@
 import requests
-import html
-
-from telegram import Update, ChatPermissions
+import random
+from telegram import Update
 from telegram.ext import CallbackContext, CommandHandler
-
 from FallenRobot import dispatcher
 
+def animequote(update: Update, context: CallbackContext):
+    response = requests.get('https://animechan.vercel.app/api/random')
+    data = response.json()
+    quote = data['quote']
+    anime = data['anime']
+    character = data['character']
+    message = f'"{quote}"\n\n- {character} ({anime})'
+    update.message.reply_text(message)
 
-def quote(update: Update, context: CallbackContext):
-    url = "https://animechan.vercel.app/api/random"
-    response = requests.get(url)
-    if response.status_code == 200:
-        quote_data = response.json()
-        quote_text = html.unescape(quote_data["quote"])
-        context.bot.send_message(chat_id=update.effective_chat.id, text=quote_text)
-    else:
-        context.bot.send_message(chat_id=update.effective_chat.id, text="Sorry, I couldn't get a quote right now.")
+ANIMEQUOTE_HANDLER = CommandHandler('quote', animequote)
 
-
-dispatcher.add_handler(CommandHandler('quote', quote))
+dispatcher.add_handler(ANIMEQUOTE_HANDLER)
