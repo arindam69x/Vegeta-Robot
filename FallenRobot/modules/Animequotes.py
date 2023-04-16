@@ -13,7 +13,7 @@ from FallenRobot.modules.helper_funcs.chat_status import (is_user_admin)
 from FallenRobot.modules.helper_funcs.extraction import extract_user
 
 @run_async
-def animequote(update: Update, context: CallbackContext):
+def animequotes(update: Update, context: CallbackContext):
     message = update.effective_message
     name = message.reply_to_message.from_user.first_name if message.reply_to_message else message.from_user.first_name
     reply_photo = message.reply_to_message.reply_photo if message.reply_to_message else message.reply_photo
@@ -21,12 +21,12 @@ def animequote(update: Update, context: CallbackContext):
         random.choice(animequotes_strings.QUOTES_IMG))
 
 __help__ = """
- • `/animequote `*:* Motivational Anime quotes
+ • `/animequotes `*:* Motivational Anime quotes
  
 """
-ANIMEQUOTES_HANDLER = DisableAbleCommandHandler("animequote", animequote)
+ANIMEQUOTES_HANDLER = DisableAbleCommandHandler("animequotes", animequotes)
 
-dispatcher.add_handler(ANIMEQUOTE_HANDLER)
+dispatcher.add_handler(ANIMEQUOTES_HANDLER)
 
 __mod_name__ = "AnimeQuotes"
 __command_list__ = [
