@@ -1,8 +1,9 @@
 import os
 import requests
 import logging
-import telegram
-from telegram.ext import CommandHandler, Updater
+
+from telegram import Update
+from telegram.ext import CommandHandler, CallbackContext
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -10,11 +11,10 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 
 # Set up API variables
-TOKEN = os.environ.get('TOKEN')
 API_URL = "https://animechan.vercel.app/api/random"
 
 # Define command handler
-def quote_handler(update, context):
+def quote_handler(update: Update, context: CallbackContext):
     # Get a random quote from the API
     response = requests.get(API_URL)
     data = response.json()
@@ -28,6 +28,9 @@ def quote_handler(update, context):
 
 # Set up the bot and add the command handler
 def main():
+    # Get the bot token from environment variable
+    TOKEN = os.environ.get('TOKEN')
+
     # Create the Updater and pass in the bot's API token
     updater = Updater(TOKEN, use_context=True)
 
