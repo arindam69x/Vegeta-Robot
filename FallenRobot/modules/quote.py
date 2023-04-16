@@ -19,10 +19,6 @@ def quote(update: Update, context: CallbackContext):
 
 QUOTE_HANDLER = CommandHandler("quote", quote)
 
-def __stats__():
-    return f"- {len(anime_quote_strings.QUOTES)} quotes in {len(anime_quote_strings.ANIME_LIST)} anime series."
-    
-
 __help__ = f"""{__stats__()}
 *Commands:*
 - /quote: Get a random anime quote.
