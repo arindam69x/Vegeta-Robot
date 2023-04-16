@@ -1,31 +1,21 @@
 import requests
 import html
 
-from telegram import Update, ParseMode
-from telegram.ext import CommandHandler, CallbackContext
+from telegram import Update, ChatPermissions
+from telegram.ext import CallbackContext, CommandHandler
+
+from FallenRobot import dispatcher
+
 
 def quote(update: Update, context: CallbackContext):
-    res = requests.get('https://animechan.vercel.app/api/random')
-    if res.status_code == 200:
-        data = res.json()
-        quote = html.escape(data['quote'])
-        anime = html.escape(data['anime'])
-        character = html.escape(data['character'])
-        message = f'<i>{quote}</i>\n\n<b>{anime}</b>\n{character}'
-        context.bot.send_message(chat_id=update.effective_chat.id, text=message, parse_mode=ParseMode.HTML)
+    url = "https://animechan.vercel.app/api/random"
+    response = requests.get(url)
+    if response.status_code == 200:
+        quote_data = response.json()
+        quote_text = html.unescape(quote_data["quote"])
+        context.bot.send_message(chat_id=update.effective_chat.id, text=quote_text)
     else:
-        context.bot.send_message(chat_id=update.effective_chat.id, text="Sorry, failed to fetch the quote. Please try again later.")
-    
+        context.bot.send_message(chat_id=update.effective_chat.id, text="Sorry, I couldn't get a quote right now.")
 
-QUOTE_HANDLER = CommandHandler("quote", quote)
 
-__help__ = f"""{__stats__()}
-*Commands:*
-- /quote: Get a random anime quote.
-"""
-
-__mod_name__ = "Anime Quotes"
-
-__handlers__ = [
-    QUOTE_HANDLER,
-]
+dispatcher.add_handler(CommandHandler('quote', quote))
