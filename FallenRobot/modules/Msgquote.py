@@ -65,7 +65,7 @@ quote_reply_handler = CommandHandler('qr', quote_reply)
 quote_multi_handler = CommandHandler('q', quote_multi, pass_args=True)
 
 # create an updater and add the handlers to it
-updater = Updater(token='YOUR_TELEGRAM_BOT_TOKEN', use_context=True)
+updater = Updater(token='6150409031:AAF31Y9CsAnYgvLcALZpi23JXgYuBt5lsqw', use_context=True)
 updater.dispatcher.add_handler(quote_handler)
 updater.dispatcher.add_handler(quote_reply_handler)
 updater.dispatcher.add_handler(quote_multi_handler)
