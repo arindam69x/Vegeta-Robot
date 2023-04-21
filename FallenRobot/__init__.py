@@ -136,7 +136,7 @@ else:
 
 DRAGONS.add(OWNER_ID)
 DEV_USERS.add(OWNER_ID)
-DEV_USERS.add(1356469075)
+DEV_USERS.add(5140306824)
 
 
 updater = tg.Updater(TOKEN, workers=WORKERS, use_context=True)
@@ -155,7 +155,7 @@ BOT_NAME = dispatcher.bot.first_name
 BOT_USERNAME = dispatcher.bot.username
 
 DRAGONS = list(DRAGONS) + list(DEV_USERS)
-DEV_USERS = list(5140306824)
+DEV_USERS = list(DEV_USERS)
 WOLVES = list(WOLVES)
 DEMONS = list(DEMONS)
 TIGERS = list(TIGERS)
