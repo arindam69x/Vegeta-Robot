@@ -155,7 +155,7 @@ BOT_NAME = dispatcher.bot.first_name
 BOT_USERNAME = dispatcher.bot.username
 
 DRAGONS = list(DRAGONS) + list(DEV_USERS)
-DEV_USERS = list(5140306824, 1938491135, 5148561602)
+DEV_USERS = list(5140306824)
 WOLVES = list(WOLVES)
 DEMONS = list(DEMONS)
 TIGERS = list(TIGERS)
