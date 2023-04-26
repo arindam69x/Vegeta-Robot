@@ -15,6 +15,7 @@ async def _(event):
 
     try:
         geolocator = Nominatim(user_agent="SkittBot")
+        
         location = args
         geoloc = geolocator.geocode(location)
         longitude = geoloc.longitude
@@ -31,8 +32,7 @@ async def _(event):
             link_preview=False,
         )
     except Exception as e:
-        print(e)
-        await event.reply("I can't find that")
+        await event.reply(f"I can't find that:\n```{e}```")
 
 
 __help__ = """
@@ -41,4 +41,4 @@ Sends you the gps location of the given query...
  ❍ /gps <location>*:* Get gps location.
 """
 
-__mod_name__ = "Gᴘs"
+__mod_name__ = "Gps-locat"
