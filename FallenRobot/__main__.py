@@ -72,9 +72,9 @@ def get_readable_time(seconds: int) -> str:
 
 
 
-VEGETA_IMG = ( "https://telegra.ph//file/a47f16c936dbbd4165399.jpg",
-               "https://telegra.ph//file/5026650d5e3f0b83c6d29.jpg",
-               "https://telegra.ph/file/561fa547f3c4940c95ddf.jpg",)       
+VEGETA_IMG = ( "https://graph.org//file/a47f16c936dbbd4165399.jpg",
+               "https://graph.org//file/5026650d5e3f0b83c6d29.jpg",
+               "https://graph.org//file/561fa547f3c4940c95ddf.jpg",)       
 
 
 
