@@ -208,7 +208,7 @@ def start(update: Update, context: CallbackContext):
         else:
             first_name = update.effective_user.first_name
             
-            img = random.choice(VGETA_IMAGE)
+            img = random.choice(VGETA_IMG)
             update.effective_message.reply_text(
                 PM_START_TEXT.format(img),
                 reply_markup=InlineKeyboardMarkup(buttons),
@@ -425,8 +425,9 @@ def Fallen_about_callback(update: Update, context: CallbackContext):
         )
     elif query.data == "fallen_back":
         first_name = update.effective_user.first_name
+        img = random.choice(VEGETA_IMG)
         query.message.edit_text(
-            PM_START_TEXT.format(escape_markdown(first_name), BOT_NAME),
+            PM_START_TEXT.format(VEGETA_IMG),
             reply_markup=InlineKeyboardMarkup(buttons),
             parse_mode=ParseMode.MARKDOWN,
             timeout=60,
@@ -464,7 +465,7 @@ def Source_about_callback(update: Update, context: CallbackContext):
         )
     elif query.data == "source_back":
         first_name = update.effective_user.first_name
-        img = random.choice(VGETA_IMAGE)
+        img = random.choice(VEGETA_IMG)
         query.message.edit_text(
             PM_START_TEXT.format(img),
             reply_markup=InlineKeyboardMarkup(buttons),
