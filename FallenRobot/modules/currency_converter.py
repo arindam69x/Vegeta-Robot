@@ -26,7 +26,7 @@ def convert(update: Update, context: CallbackContext):
             f"?function=CURRENCY_EXCHANGE_RATE"
             f"&from_currency={orig_cur}"
             f"&to_currency={new_cur}",
-            f"&apikey="2RBVCXF8W7AMNP62"
+            f"&apikey=2RBVCXF8W7AMNP62"
         )
         response = requests.get(request_url).json()
         try:
