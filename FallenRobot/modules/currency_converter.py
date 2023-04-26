@@ -2,7 +2,7 @@ import requests
 from telegram import ParseMode, Update
 from telegram.ext import CallbackContext, CommandHandler, run_async
 
-from FallenRobot import CASH_API_KEY, dispatcher
+from FallenRobot import dispatcher
 
 
 @run_async
@@ -26,7 +26,7 @@ def convert(update: Update, context: CallbackContext):
             f"?function=CURRENCY_EXCHANGE_RATE"
             f"&from_currency={orig_cur}"
             f"&to_currency={new_cur}"
-            f"&apikey={CASH_API_KEY}"
+            f"&apikey="2RBVCXF8W7AMNP62"
         )
         response = requests.get(request_url).json()
         try:
