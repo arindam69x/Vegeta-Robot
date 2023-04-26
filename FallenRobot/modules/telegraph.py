@@ -14,7 +14,7 @@ r = telegraph.create_account(short_name=Anonymous)
 auth_url = r["auth_url"]
 
 
-@register(pattern="^/tg(m|t) ?(.*)")
+@register(pattern="^/tm(m|t) ?(.*)")
 async def _(event):
     if event.fwd_from:
         return
@@ -72,7 +72,7 @@ async def _(event):
             end = datetime.now()
             ms = (end - start).seconds
             await event.reply(
-                "Pasted to https://telegra.ph/{} in {} seconds.".format(
+                "Pasted to https://graph.org/{} in {} seconds.".format(
                     response["path"], ms
                 ),
                 link_preview=True,
@@ -93,4 +93,4 @@ I can upload files to Telegraph
  ❍ /tgt [custom name]: Get telegraph link of replied text with custom name.
 """
 
-__mod_name__ = "T-Gʀᴀᴘʜ"
+__mod_name__ = "T-Graph"
