@@ -5,9 +5,11 @@ import requests
 from telegram import ParseMode, Update
 from telegram.ext import CallbackContext, run_async
 
-from FallenRobot import TIME_API_KEY, dispatcher
+from FallenRobot import dispatcher
 from FallenRobot.modules.disable import DisableAbleCommandHandler
 
+
+TIME_API_KEY = "W7FUYKRKVHO9"
 
 def generate_time(to_find: str, findtype: List[str]) -> str:
     data = requests.get(
@@ -104,6 +106,6 @@ TIME_HANDLER = DisableAbleCommandHandler("time", gettime)
 
 dispatcher.add_handler(TIME_HANDLER)
 
-__mod_name__ = "Tɪᴍᴇ"
+__mod_name__ = "Time"
 __command_list__ = ["time"]
 __handlers__ = [TIME_HANDLER]
