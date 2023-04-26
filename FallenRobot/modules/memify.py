@@ -183,4 +183,13 @@ async def drawText(image_path, text):
     return webp_file
 
 
-__mod_name__ = "mmf"
+__mod_name__ = "Memify"
+
+__help__ = """
+Memify: reply to the sticker and input your command 
+Text for input the sticker your text, for example
+if you reply to the sticker with /mmf Nandha 
+The ```nandha``` ward will insert to the sticker 😆
+you can make memes , stickers fun more ect..
+"""
+
