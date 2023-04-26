@@ -208,7 +208,7 @@ def start(update: Update, context: CallbackContext):
         else:
             first_name = update.effective_user.first_name
             
-            img = random.choice(VGETA_IMG)
+            img = random.choice(VEGETA_IMG)
             update.effective_message.reply_text(
                 PM_START_TEXT.format(img),
                 reply_markup=InlineKeyboardMarkup(buttons),
