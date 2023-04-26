@@ -37,6 +37,7 @@ from FallenRobot import (
     StartTime,
     dispatcher,
     pbot,
+    START_IMG,
     telethn,
     updater,
 )
