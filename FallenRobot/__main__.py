@@ -1,5 +1,5 @@
 import importlib
-import re
+import re, random
 import time
 from platform import python_version as y
 from sys import argv
