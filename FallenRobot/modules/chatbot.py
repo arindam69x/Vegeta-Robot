@@ -146,7 +146,7 @@ __help__ = f"""
  »  /chatbot *:* Shows chatbot control panel
 """
 
-__mod_name__ = "Cʜᴀᴛʙᴏᴛ"
+__mod_name__ = "ChatBot"
 
 
 CHATBOTK_HANDLER = CommandHandler("chatbot", fallen)
