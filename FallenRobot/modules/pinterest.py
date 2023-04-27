@@ -17,7 +17,7 @@ async def pinterest(_, message):
 
      images = get(f"https://pinterest-api-one.vercel.app/?q={query}").json()
 
-     images_url = images[:6]
+     images_url = images["images"][:6]
      
      media_group = []
 
