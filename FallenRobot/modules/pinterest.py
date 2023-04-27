@@ -4,7 +4,7 @@ from FallenRobot import pbot
 from pyrogram import filters
 from pyrogram.types import InputMediaPhoto
 
-@NandhaBots
+# credit to @NandhaBots
 
 @pbot.on_message(filters.command("pinterest"))
 async def pinterest(_, message):
