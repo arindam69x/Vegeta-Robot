@@ -80,7 +80,7 @@ VEGETA_IMG = ( "https://graph.org//file/a47f16c936dbbd4165399.jpg",
 
 PM_START_TEXT = """ ┗►  *What's Up Yoo! * ◄┛
 ~~ *I'm made with Saiyans blood* ~~
-~ *Wanna see my commands*❗[\u2800]({})
+~ *Wanna see my commands*[❗]({})
 *below click the help button!* ~
 ──『*ᴛʜᴀɴᴋs  ғᴏʀ  ᴜsɪɴɢ*』
 """ 
@@ -214,6 +214,7 @@ def start(update: Update, context: CallbackContext):
                 reply_markup=InlineKeyboardMarkup(buttons),
                 parse_mode=ParseMode.MARKDOWN,
                 timeout=60,
+                disable_web_page_preview=False,
             )
     else:
         update.effective_message.reply_animation(
