@@ -23,13 +23,11 @@ async def pinterest(_, message):
 
      msg = await message.reply(f"scaping images from pinterest...")
 
-     for url in images:
+     for url in images[:6]:
                   
           media_group.append(InputMediaPhoto(media=url))
           count += 1
           await msg.edit(f"=> ✅ Scaped {count}")
-          if count == 7:
-              break
 
      try:
         
