@@ -21,22 +21,25 @@ async def pinterest(_, message):
      media_group = []
      count = 0
 
-     await message.reply("scaping images from pinterest...")
+     msg = await message.reply("scaping images from pinterest...")
 
      for url in images:
           if count == 7:
               break        
           media_group.append(InputMediaPhoto(media=url))
           count += 1
-          await message.edit("Scaped {count}")
+          await msg.edit("=> Scaped {count}")
 
      try:
-        return await pbot.send_media_group(
+        
+        await pbot.send_media_group(
                 chat_id=chat_id, 
                 media=media_group,
                 reply_to_message_id=message.id)
+        return await msg.delete()
 
      except Exception as e:
+           await msg.delete()
            return await message.reply(f"Error\n{e}")
           
      
