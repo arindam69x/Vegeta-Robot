@@ -23,7 +23,7 @@ async def pinterest(_, message):
 
      msg = await message.reply(f"scaping images from pinterest...")
 
-     for url in images[:6]:
+     for url in images["images"][:6]:
                   
           media_group.append(InputMediaPhoto(media=url))
           count += 1
