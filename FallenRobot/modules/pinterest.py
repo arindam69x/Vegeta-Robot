@@ -18,12 +18,17 @@ async def pinterest(_, message):
 
      images = get(f"https://pinterest-api-one.vercel.app/?q={query}").json()
 
-     images_url = images["images"][:6]
-     
      media_group = []
+     count = 0
 
-     for url in images_url:           
+     await message.reply("scaping images from pinterest...")
+
+     for url in images:
+          if count == 7:
+              break        
           media_group.append(InputMediaPhoto(media=url))
+          count += 1
+          await message.edit("Scaped {count}")
 
      try:
         return await pbot.send_media_group(
