@@ -40,5 +40,4 @@ __help__ = """
 » /ud (text) *:* Searchs the given text on Urban Dictionary and sends you the information.
 """
 __mod_name__ = "Urban Dictionary"
-__command_list__ = ["ud"]
-__handlers__ = [UD_HANDLER]
+
