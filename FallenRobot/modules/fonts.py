@@ -108,7 +108,7 @@ async def nxt(c, m):
 async def style(c, query):
     
 
-    cmd, style = m.data.split("+")
+    cmd, style = query.data.split("+")
 
     if style == "typewriter":
         cls = Fonts.typewriter
