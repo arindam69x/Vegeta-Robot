@@ -25,7 +25,7 @@ async def next(_, query):
        user_id = query.from_user.id
        if not user_id == int(query.data.split(":")[-1]):
              return await query.answer("This is not for You!")
-       num = int(query.data.split(":")[1])
+       num = int(query.data.split(":")[1])+1
        uwu = mm[num]
        if num == len(mm)-1:
        	  return await query.message.edit('=> No more definition could be found!')
