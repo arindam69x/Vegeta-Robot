@@ -4,7 +4,7 @@ from pyrogram import filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 
-By @NandhaBots on telegram 
+#By @NandhaBots on telegram 
 
 @app.on_message(filters.command("ud"))
 async def urban(_, m):  
