@@ -6,7 +6,7 @@ from FallenRobot.utils.fonts import Fonts
 
 
 @Client.on_message(filters.command(["font", "fonts"]))
-async def style_buttons(c, m):
+async def style_buttons(c, m, cb=False):
     if len(m.text.split()) == 1:
         return await m.reply_text("Enter text to stylish", quote=True)
 
@@ -50,13 +50,17 @@ async def style_buttons(c, m):
         ],
         [InlineKeyboardButton("ɴᴇxᴛ ➻", callback_data="nxt")],
     ]
-    return await m.reply_text(
-            text, reply_markup=InlineKeyboardMarkup(buttons), quote=True
-        )
-
+    
+    if not cb:
+           return await m.reply_text(
+            text, reply_markup=InlineKeyboardMarkup(buttons), quote=True)
+    else:
+         await m.answer()
+         return await m.message.edit_reply_markup(InlineKeyboardMarkup(buttons))
     
 @Client.on_callback_query(filters.regex("^nxt"))
 async def nxt(c, query):
+       
     
         buttons = [
             [
@@ -99,9 +103,10 @@ async def nxt(c, query):
             ],
             [InlineKeyboardButton("ʙᴀᴄᴋ", callback_data="nxt+0")],
         ]
-        
-        return await query.message.edit_reply_markup(InlineKeyboardMarkup(buttons))
-    
+        if query.data == "nxt":
+               return await query.message.edit_reply_markup(InlineKeyboardMarkup(buttons))
+        else:
+               return await style_buttons(c, m, cb=True)
 
 
 @Client.on_callback_query(filters.regex("^style"))
