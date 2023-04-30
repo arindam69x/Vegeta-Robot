@@ -105,8 +105,9 @@ async def nxt(c, m):
 
 
 @Client.on_callback_query(filters.regex("^style"))
-async def style(c, m):
-    await m.answer()
+async def style(c, query):
+    
+
     cmd, style = m.data.split("+")
 
     if style == "typewriter":
@@ -187,11 +188,11 @@ async def style(c, m):
         cls = Fonts.strike
     if style == "frozen":
         cls = Fonts.frozen
-    new_text = cls(m.message.text)
-    
-    try:
-        await m.answer()
-        return await m.message.edit_text(new_text, reply_markup=m.message.reply_markup)
+
+    new_text = cls(query.message.text)
+
+    try:     
+        return await query.message.edit_text(new_text, reply_markup=query.message.reply_markup)
     except:
         pass
 
