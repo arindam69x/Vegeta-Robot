@@ -188,7 +188,9 @@ async def style(c, m):
     if style == "frozen":
         cls = Fonts.frozen
     new_text = cls(m.message.text)
+    
     try:
+        await m.answer()
         return await m.message.edit_text(new_text, reply_markup=m.message.reply_markup)
     except:
         pass
