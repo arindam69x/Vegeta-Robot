@@ -10,7 +10,7 @@ async def style_buttons(c, m):
     try:
       text = m.text.split(m.text.split()[0])[1]
     except:
-       return await message.reply("Enter text to stylish")
+       return await m.reply("Enter text to stylish", quote=True)
 
     buttons = [
         [
@@ -57,7 +57,7 @@ async def style_buttons(c, m):
     
 @Client.on_callback_query(filters.regex("^nxt"))
 async def nxt(c, m):
-    if m.data == "nxt":
+    
         buttons = [
             [
                 InlineKeyboardButton("🇸 🇵 🇪 🇨 🇮 🇦 🇱 ", callback_data="style+special"),
@@ -100,9 +100,8 @@ async def nxt(c, m):
             [InlineKeyboardButton("ʙᴀᴄᴋ", callback_data="nxt+0")],
         ]
         await m.answer()
-        await m.message.edit_reply_markup(InlineKeyboardMarkup(buttons))
-    else:
-        await style_buttons(c, m, cb=True)
+        return await m.message.edit_reply_markup(InlineKeyboardMarkup(buttons))
+    
 
 
 @Client.on_callback_query(filters.regex("^style"))
@@ -190,7 +189,7 @@ async def style(c, m):
         cls = Fonts.frozen
     new_text = cls(m.message.reply_to_message.text)
     try:
-        await m.message.edit_text(new_text, reply_markup=m.message.reply_markup)
+        return await m.message.edit_text(new_text, reply_markup=m.message.reply_markup)
     except:
         pass
 
