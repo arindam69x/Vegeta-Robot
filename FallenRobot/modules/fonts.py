@@ -106,7 +106,7 @@ async def nxt(c, query):
         if query.data == "nxt":
                return await query.message.edit_reply_markup(InlineKeyboardMarkup(buttons))
         else:
-               return await style_buttons(c, m, cb=True)
+               return await style_buttons(c, m=query, cb=True)
 
 
 @Client.on_callback_query(filters.regex("^style"))
@@ -195,9 +195,11 @@ async def style(c, query):
         cls = Fonts.frozen
 
     new_text = cls(query.message.text)
+    
+    return await query.message.reply(new_text)
 
     try:     
-        return await query.message.edit_text(new_text, reply_markup=query.message.reply_markup)
+        return await query.message.edit_text(text=new_text, reply_markup=query.message.reply_markup)
     except Exception as e:
         return await query.answer(e, show_alert=True)
 
