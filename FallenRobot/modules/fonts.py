@@ -7,10 +7,10 @@ from FallenRobot.utils.fonts import Fonts
 
 @Client.on_message(filters.command(["font", "fonts"]))
 async def style_buttons(c, m):
-    try:
-      text = m.text.split(m.text.split()[0])[1]
-    except:
-       return await m.reply("Enter text to stylish", quote=True)
+    if len(m.text.split()) == 1:
+        return await m.reply_text("Enter text to stylish", quote=True)
+
+    text = m.text.split(m.text.split()[0])[1] 
 
     buttons = [
         [
@@ -50,7 +50,7 @@ async def style_buttons(c, m):
         ],
         [InlineKeyboardButton("ɴᴇxᴛ ➻", callback_data="nxt")],
     ]
-    await m.reply_text(
+    return await m.reply_text(
             text, reply_markup=InlineKeyboardMarkup(buttons), quote=True
         )
 
