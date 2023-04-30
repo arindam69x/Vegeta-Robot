@@ -56,7 +56,7 @@ async def style_buttons(c, m):
 
     
 @Client.on_callback_query(filters.regex("^nxt"))
-async def nxt(c, m):
+async def nxt(c, query):
     
         buttons = [
             [
@@ -99,8 +99,8 @@ async def nxt(c, m):
             ],
             [InlineKeyboardButton("ʙᴀᴄᴋ", callback_data="nxt+0")],
         ]
-        await m.answer()
-        return await m.message.edit_reply_markup(InlineKeyboardMarkup(buttons))
+        
+        return await query.message.edit_reply_markup(InlineKeyboardMarkup(buttons))
     
 
 
@@ -108,7 +108,7 @@ async def nxt(c, m):
 async def style(c, query):
     
 
-    cmd, style = query.data.split("+")
+    style = query.data.split("+")[1]
 
     if style == "typewriter":
         cls = Fonts.typewriter
@@ -193,8 +193,8 @@ async def style(c, query):
 
     try:     
         return await query.message.edit_text(new_text, reply_markup=query.message.reply_markup)
-    except:
-        pass
+    except Exception as e:
+        return await query.answer(e, show_alert=True)
 
 
 __help__ = """
