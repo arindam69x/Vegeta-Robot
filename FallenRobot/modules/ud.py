@@ -13,7 +13,7 @@ async def urban(_, m):
        if len(m.text.split()) == 1:
          return await m.reply("Enter the text for which you would like to find the definition.")
        text = m.text.split(None,1)[1]
-       api = get(f"https://api.urbandictionary.com/v0/define?term={text}").json()
+       api = requests.get(f"https://api.urbandictionary.com/v0/define?term={text}").json()
        mm = api["list"]
        if 0 == len(mm):
            return await m.reply("=> No results Found!")
