@@ -22,14 +22,15 @@ async def urban(_, m):
               
 @app.on_callback_query(filters.regex("^udnxt"))   
 async def next(_, query):
-       if not query.from_user.id == int(query.data.split(":")[-1]):
+       user_id = query.from_user.id
+       if not user_id == int(query.data.split(":")[-1]):
              return await query.answer("This is not for You!")
        num = int(query.data.split(":")[1])
        uwu = mm[num]
        if num == len(mm)-1:
        	  return await query.message.edit('=> No more definition could be found!')
        string = f"🔍 **Ward**: {uwu.get('word')}\n\n📝 **Definition**: {uwu.get('definition')}\n\n✏️ **Example**: {uwu.get('example')}"
-       return await query.message.edit(text=string, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('➡️ Next', callback_data=f"udnxt:{num}")]]))
+       return await query.message.edit(text=string, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('➡️ Next', callback_data=f"udnxt:{num}:{user_id}")]]))
        
        
        
