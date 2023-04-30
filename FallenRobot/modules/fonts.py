@@ -7,10 +7,7 @@ from FallenRobot.utils.fonts import Fonts
 
 @Client.on_message(filters.command(["font", "fonts"]))
 async def style_buttons(c, m, cb=False):
-    if len(m.text.split()) == 1:
-        return await m.reply_text("Enter text to stylish", quote=True)
-
-    text = m.text.split(m.text.split()[0])[1] 
+     
 
     buttons = [
         [
@@ -52,8 +49,12 @@ async def style_buttons(c, m, cb=False):
     ]
     
     if not cb:
+           if len(m.text.split()) == 1:
+               return await m.reply_text("Enter text to stylish", quote=True)
+
+           text = m.text.split(m.text.split()[0])[1]
            return await m.reply_text(
-            text, reply_markup=InlineKeyboardMarkup(buttons), quote=True)
+                text=text, reply_markup=InlineKeyboardMarkup(buttons), quote=True)
     else:
          await m.answer()
          return await m.message.edit_reply_markup(InlineKeyboardMarkup(buttons))
@@ -194,14 +195,12 @@ async def style(c, query):
     if style == "frozen":
         cls = Fonts.frozen
 
-    new_text = cls(query.message.text)
-    
-    return await query.message.reply(new_text)
+    new_text = cls(query.message.text)   
 
     try:     
         return await query.message.edit_text(text=new_text, reply_markup=query.message.reply_markup)
     except Exception as e:
-        return await query.answer(e, show_alert=True)
+        return await query.message.edit_text(f"=> {new_text}")
 
 
 __help__ = """
