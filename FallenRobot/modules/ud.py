@@ -17,7 +17,7 @@ async def urban(_, m):
        mm = api["list"]
        if 0 == len(mm):
            return await m.reply("=> No results Found!")
-       string = f"🔍 **Ward**: {mm[0]["word"]}\n\n📝 **Definition**: {mm[0]["definition"]}\n\n✏️ **Example**: {mm[0]["example"]}"
+       string = f"🔍 **Ward**: {mm[0].get('word')}\n\n📝 **Definition**: {mm[0].get('definition')}\n\n✏️ **Example**: {mm[0].get('example')}"
        return await m.reply(text=string, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('next', callback_data=f"udnxt:1:{user_id}")]]), quote=True)
               
 @app.on_callback_query(filters.regex("^udnxt"))   
@@ -28,7 +28,7 @@ async def next(_, query):
        uwu = mm[num]
        if num == len(mm)-1:
        	  return await query.message.edit('=> No more definition could be found!')
-       string = f"🔍 **Ward**: {uwu["word"]}\n\n📝 **Definition**: {uwu["definition"]}\n\n✏️ **Example**: {uwu["example"]}"
+       string = f"🔍 **Ward**: {uwu.get('word')}\n\n📝 **Definition**: {uwu.get('definition')}\n\n✏️ **Example**: {uwu.get('example')}"
        return await query.message.edit(text=string, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('➡️ Next', callback_data=f"udnxt:{num}")]]))
        
        
