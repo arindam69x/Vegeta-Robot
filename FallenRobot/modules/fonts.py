@@ -10,7 +10,7 @@ async def style_buttons(c, m):
     try:
       text = m.text.split(m.text.split()[0])[1]
     except:
-       return await message.reply('Enter text to stylish")
+       return await message.reply("Enter text to stylish")
 
     buttons = [
         [
