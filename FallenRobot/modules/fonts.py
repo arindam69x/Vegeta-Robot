@@ -200,7 +200,7 @@ async def style(c, query):
     try:     
         return await query.message.edit_text(text=new_text, reply_markup=query.message.reply_markup)
     except Exception as e:
-        return await query.message.edit_text(f"=> {new_text}")
+        return await query.message.edit_text(text=f"=> {new_text}", reply_markup=query.message.reply_markup)
 
 
 __help__ = """
