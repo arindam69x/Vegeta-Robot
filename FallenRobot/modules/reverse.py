@@ -13,7 +13,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 # Credit @the_only_god/@Yeah_Am_Kakashi
 
 
-async def Sauce(bot_token: TOKEN , file_id):
+async def Sauce(bot_token, file_id):
     r = requests.post(f'https://api.telegram.org/bot{bot_token}/getFile?file_id={file_id}').json()
     file_path = r['result']['file_path']
     headers = {'User-agent': 'Mozilla/5.0 (Linux; Android 6.0.1; SM-G920V Build/MMB29K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.98 Mobile Safari/537.36'}
@@ -78,7 +78,7 @@ async def _reverse(_,msg):
     if not file_id:
         return await text.edit("**reply to media!**")
     await text.edit("**⇢ Requesting to Google....**")    
-    result = await Sauce(bot_token,file_id)
+    result = await Sauce(TOKEN,file_id)
     await text.edit(f'[{result["output"]}]({result["similar"]})\n\n⇢**by** - @VegetaRobot',reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Source Link",url=result["similar"])]]))
    
  
