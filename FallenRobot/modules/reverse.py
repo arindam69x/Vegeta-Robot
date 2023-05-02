@@ -77,10 +77,15 @@ async def _reverse(_,msg):
     file_id = await get_file_id_from_message(msg)
     if not file_id:
         return await text.edit("**reply to media!**")
-    await text.edit("**⇢ Requesting to Google....**")    
-    result = await Sauce(TOKEN,file_id)
+    await text.edit("**⇢ Requesting to Google....**")  
+
+    try:  
+        result = await Sauce(TOKEN,file_id)
+    except Exception as e:
+        return await text.edit(e)
+
     await text.edit(f'[{result["output"]}]({result["similar"]})\n\n⇢**by** - @VegetaRobot',reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Source Link",url=result["similar"])]]))
    
  
-                      #fk
+                      
  
