@@ -83,7 +83,7 @@ async def _reverse(_,msg):
     if not result["output"]:
         return await text.edit("Couldn't find anything")
     
-    await text.edit(f'[{result["output"]}]({result["similar"]})\n\n⇢**by** - @VegetaRobot',reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Source Link",url=result["similar"])]]))
+    await text.edit(f'[{result["output"]}]({result["similar"]})\n\n⇢**by** - @ShokouXrobot',reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Source Link",url=result["similar"])]]))
    
  
                       
