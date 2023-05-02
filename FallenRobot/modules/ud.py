@@ -41,6 +41,7 @@ async def next(_, query):
                   InlineKeyboardButton("Back ⏮️", callback_data=f"udbck:{query.from_user.id}:{text}:{num}"),
                   InlineKeyboardButton("Next ⏭️", callback_data=f"udnxt:{query.from_user.id}:{text}:{num}") 
              ]]
+             return await query.message.edit(text=string, reply_markup=InlineKeyboardMarkup(buttons))
        
        
 
