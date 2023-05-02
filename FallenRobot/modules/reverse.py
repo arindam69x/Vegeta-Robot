@@ -2,7 +2,7 @@
 import requests
 
 
-from FallenRobot import pbot as app, BOT_TOKEN
+from FallenRobot import pbot as app, TOKEN
 from pyrogram import filters
 
 from urllib.parse import quote_plus
@@ -13,7 +13,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 # Credit @the_only_god/@Yeah_Am_Kakashi
 
 
-async def Sauce(bot_token: BOT_TOKEN , file_id):
+async def Sauce(bot_token: TOKEN , file_id):
     r = requests.post(f'https://api.telegram.org/bot{bot_token}/getFile?file_id={file_id}').json()
     file_path = r['result']['file_path']
     headers = {'User-agent': 'Mozilla/5.0 (Linux; Android 6.0.1; SM-G920V Build/MMB29K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.98 Mobile Safari/537.36'}
