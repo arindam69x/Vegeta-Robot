@@ -574,7 +574,6 @@ def upcoming(update, context):
 
 
 
-@run_async
 def button(update, context):
     bot = context.bot
     query = update.callback_query
@@ -610,7 +609,7 @@ def button(update, context):
         else:
             query.answer("You are not allowed to use this.")
 
-@run_async
+
 def anime_quote():
     url = "https://animechan.vercel.app/api/random"
     # since text attribute returns dictionary like string
