@@ -265,7 +265,7 @@ query ($id: Int,$search: String) {
 url = 'https://graphql.anilist.co'
 
 
-
+@run_async
 @typing_action
 def airing(update, context):
     message = update.effective_message
@@ -293,7 +293,7 @@ def airing(update, context):
     update.effective_message.reply_text(msg, parse_mode=ParseMode.MARKDOWN)
 
 
-
+@run_async
 @typing_action
 def anime(update, context):
     message = update.effective_message
@@ -364,7 +364,7 @@ def anime(update, context):
                 reply_markup=InlineKeyboardMarkup(buttons))
 
 
-
+@run_async
 @typing_action
 def character(update, context):
     message = update.effective_message
@@ -403,7 +403,7 @@ def character(update, context):
                 msg.replace('<b>', '</b>'), reply_markup=InlineKeyboardMarkup(buttons), parse_mode=ParseMode.MARKDOWN)
 
 
-
+@run_async
 @typing_action
 def manga(update, context):
     message = update.effective_message
@@ -468,8 +468,7 @@ def manga(update, context):
                 parse_mode=ParseMode.MARKDOWN,
                 reply_markup=InlineKeyboardMarkup(buttons))
 
-
-
+@run_async
 @typing_action
 def user(update, context):
     message = update.effective_message
@@ -553,7 +552,7 @@ def user(update, context):
     progress_message.delete()
 
 
-
+@run_async
 @typing_action
 def upcoming(update, context):
     jikan = jikanpy.jikan.Jikan()
@@ -575,7 +574,7 @@ def upcoming(update, context):
 
 
 
-
+@run_async
 def button(update, context):
     bot = context.bot
     query = update.callback_query
@@ -611,6 +610,7 @@ def button(update, context):
         else:
             query.answer("You are not allowed to use this.")
 
+@run_async
 def anime_quote():
     url = "https://animechan.vercel.app/api/random"
     # since text attribute returns dictionary like string
@@ -625,6 +625,7 @@ def anime_quote():
     return quote, character, anime
 
 
+@run_async
 def quotes(update: Update, context: CallbackContext):
     message = update.effective_message
     quote, character, anime = anime_quote()
@@ -639,6 +640,7 @@ def quotes(update: Update, context: CallbackContext):
     )
 
 
+@run_async
 def change_quote(update: Update, context: CallbackContext):
     query = update.callback_query
     chat = update.effective_chat
@@ -650,6 +652,7 @@ def change_quote(update: Update, context: CallbackContext):
     )
     message.edit_text(msg, reply_markup=keyboard, parse_mode=ParseMode.HTML)
 
+@run_async
 def site_search(update: Update, context: CallbackContext, site: str):
     message = update.effective_message
     search_query = extract_arg(message)
@@ -707,16 +710,16 @@ def site_search(update: Update, context: CallbackContext, site: str):
             result, parse_mode=ParseMode.HTML, disable_web_page_preview=True,
         )
 
-
-
+@run_async
 def kaizoku(update: Update, context: CallbackContext):
     site_search(update, context, "kaizoku")
 
 
-
+@run_async
 def kayo(update: Update, context: CallbackContext):
     site_search(update, context, "kayo")
 
+@run_async
 def animequotes(update: Update, context: CallbackContext):
     message = update.effective_message
     name = message.reply_to_message.from_user.first_name if message.reply_to_message else message.from_user.first_name
@@ -772,22 +775,22 @@ You saw a good anime video, photo, gif but dont know what is that anime's name?
 This is where whatanime comes in, just reply to that media with /whatanime and it will search the anime name for you from anilist.                             
  """
 
-ANIME_HANDLER = DisableAbleCommandHandler("anime", anime, run_async=True)
-AIRING_HANDLER = DisableAbleCommandHandler("airing", airing, run_async=True)
-CHARACTER_HANDLER = DisableAbleCommandHandler("character", character, run_async=True)
-MANGA_HANDLER = DisableAbleCommandHandler("manga", manga, run_async=True)
-USER_HANDLER = DisableAbleCommandHandler("user", user, run_async=True)
-UPCOMING_HANDLER = DisableAbleCommandHandler("upcoming", upcoming, run_async=True)
-KAIZOKU_SEARCH_HANDLER = DisableAbleCommandHandler("kaizoku", kaizoku, run_async=True)
-KAYO_SEARCH_HANDLER = DisableAbleCommandHandler("kayo", kayo, run_async=True)
-BUTTON_HANDLER = CallbackQueryHandler(button, pattern='anime_.*', run_async=True)
+ANIME_HANDLER = DisableAbleCommandHandler("anime", anime)
+AIRING_HANDLER = DisableAbleCommandHandler("airing", airing)
+CHARACTER_HANDLER = DisableAbleCommandHandler("character", character)
+MANGA_HANDLER = DisableAbleCommandHandler("manga", manga)
+USER_HANDLER = DisableAbleCommandHandler("user", user)
+UPCOMING_HANDLER = DisableAbleCommandHandler("upcoming", upcoming)
+KAIZOKU_SEARCH_HANDLER = DisableAbleCommandHandler("kaizoku", kaizoku)
+KAYO_SEARCH_HANDLER = DisableAbleCommandHandler("kayo", kayo)
+BUTTON_HANDLER = CallbackQueryHandler(button, pattern='anime_.*')
 
-BUTTON_HANDLER = CallbackQueryHandler(button, pattern='anime_.*', run_async=True)
-ANIME_STUFFS_HANDLER = CallbackQueryHandler(animestuffs, pattern='xanime_.*', run_async=True)
-ANIMEQUOTES_HANDLER = DisableAbleCommandHandler("animequotes", animequotes, run_async=True)
+BUTTON_HANDLER = CallbackQueryHandler(button, pattern='anime_.*')
+ANIME_STUFFS_HANDLER = CallbackQueryHandler(animestuffs, pattern='xanime_.*')
+ANIMEQUOTES_HANDLER = DisableAbleCommandHandler("animequotes", animequotes)
 QUOTE = DisableAbleCommandHandler("quote", quotes)
-CHANGE_QUOTE = CallbackQueryHandler(change_quote, pattern=r"change_.*", run_async=True)
-QUOTE_CHANGE = CallbackQueryHandler(change_quote, pattern=r"quote_.*", run_async=True)
+CHANGE_QUOTE = CallbackQueryHandler(change_quote, pattern=r"change_.*")
+QUOTE_CHANGE = CallbackQueryHandler(change_quote, pattern=r"quote_.*")
 
 
 dispatcher.add_handler(BUTTON_HANDLER)
