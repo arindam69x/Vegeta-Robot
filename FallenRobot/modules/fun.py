@@ -7,6 +7,7 @@ from telegram.error import BadRequest
 from telegram.ext import CallbackContext, run_async
 
 import FallenRobot.modules.fun_strings as fun_strings
+from FallenRobot.resources.quote import SIGMA
 from FallenRobot import dispatcher
 from FallenRobot.modules.disable import DisableAbleCommandHandler
 from FallenRobot.modules.helper_funcs.chat_status import is_user_admin
@@ -175,6 +176,18 @@ def shout(update: Update, context: CallbackContext):
 def toss(update: Update, context: CallbackContext):
     update.message.reply_text(random.choice(fun_strings.TOSS))
 
+@run_async
+def sigma(update: Update, context: CallbackContext):
+   quote = random.choice(SIGMA)
+   string = """\n
+👾 Here The SIGMA Quote:
+
+`{quote}`
+
+by @Team_Sigma
+"""
+   update.message.reply_text(string)
+
 
 @run_async
 def shrug(update: Update, context: CallbackContext):
@@ -330,6 +343,7 @@ __help__ = """
  ❍ /shrug*:* get shrug XD
  ❍ /table*:* get flip/unflip :v
  ❍ /decide*:* Randomly answers yes/no/maybe
+ ❍ /sigma*:* Random Sigma Quote.
  ❍ /toss*:* Tosses A coin
  ❍ /bluetext*:* check urself :V
  ❍ /roll*:* Roll a dice
@@ -347,6 +361,7 @@ SLAP_HANDLER = DisableAbleCommandHandler("slap", slap)
 PAT_HANDLER = DisableAbleCommandHandler("pat", pat)
 ROLL_HANDLER = DisableAbleCommandHandler("roll", roll)
 TOSS_HANDLER = DisableAbleCommandHandler("toss", toss)
+DisableAbleCommandHandler("sigma", sigma)
 SHRUG_HANDLER = DisableAbleCommandHandler("shrug", shrug)
 BLUETEXT_HANDLER = DisableAbleCommandHandler("bluetext", bluetext)
 RLG_HANDLER = DisableAbleCommandHandler("rlg", rlg)
@@ -364,6 +379,7 @@ dispatcher.add_handler(SLAP_HANDLER)
 dispatcher.add_handler(PAT_HANDLER)
 dispatcher.add_handler(ROLL_HANDLER)
 dispatcher.add_handler(TOSS_HANDLER)
+dispatcher.add_handler(SIGMA_HANDLER)
 dispatcher.add_handler(SHRUG_HANDLER)
 dispatcher.add_handler(BLUETEXT_HANDLER)
 dispatcher.add_handler(RLG_HANDLER)
@@ -377,6 +393,7 @@ __command_list__ = [
     "slap",
     "roll",
     "toss",
+    "sigma",
     "shrug",
     "bluetext",
     "rlg",
@@ -394,6 +411,7 @@ __handlers__ = [
     PAT_HANDLER,
     ROLL_HANDLER,
     TOSS_HANDLER,
+    SIGMA_HANDLER,,
     SHRUG_HANDLER,
     BLUETEXT_HANDLER,
     RLG_HANDLER,
