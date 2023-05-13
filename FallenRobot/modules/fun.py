@@ -179,7 +179,7 @@ def toss(update: Update, context: CallbackContext):
 @run_async
 def sigma(update: Update, context: CallbackContext):
    quote = random.choice(SIGMA)
-   string = """\n
+   string = f"""\n
 👾 Here The SIGMA Quote:
 
 `{quote}`
